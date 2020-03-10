@@ -215,14 +215,14 @@ module.exports.contains = contains;
  * @param {Function} action: Call function invoking arguments that correlate 
  *                          within array and object.
  */
-function each(collection, aFunction) {
+function each(collection, action) {
     if(Array.isArray(collection)) { 
     for( let i = 0; i < collection.length; i++) { 
-        aFunction(collection[i], i, collection); 
+        action(collection[i], i, collection); 
     }
     } else if (typeof collection === 'object') { 
         for (var key in collection) {
-            aFunction(collection[key],key,collection); 
+            action(collection[key],key,collection); 
         }
     }
 }
@@ -271,10 +271,10 @@ module.exports.unique = unique;
  * @return {Array} collection: Return a new array of values.
  */
  
- function filter(array,aFunction) {
+ function filter(array,action) {
     var newArray = [];
       each(array,function(element, index, array){
-         if (aFunction(element, index, array)) {
+         if (action(element, index, array)) {
              newArray.push(element);
          }
 });
