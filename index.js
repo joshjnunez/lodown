@@ -82,7 +82,7 @@ module.exports.identity = identity;
   *              in <array>. 
   *             Otherwise, return first <number> items of the <array>. 
   * 
-  * @param {Array} collection: Collection is determined to be an array or not.
+  * @param {Array} array: Collection is determined to be an array or not.
   *                     
   * @param {Number} number: Number is checked to see if it is given or if it
   *                         is a number.
@@ -101,8 +101,7 @@ module.exports.identity = identity;
     } else if (number < 0) { 
         return [];
     } else {
-        array.splice(number,array.length);
-        return array;
+       return array[number];
     }
 }
 
@@ -117,7 +116,7 @@ module.exports.first = first;
  *              in <array>. 
  *             Otherwise, return last <number> items of the <array>. 
  * 
- * @param {Array} collection: Collection is determined to be an array or not.
+ * @param {Array} array: Collection is determined to be an array or not.
  * 
  * @param {Number} number: Number is checked to see if it is given or if it
  *                         is a number.
@@ -155,7 +154,7 @@ module.exports.last = last;
  *                      <value>.
  *                  Return -1 if <value> is not in <array>.
  * 
- * @param {Array} collection: Loop through <array> to locate <value>
+ * @param {Array} array: Loop through <array> to locate <value>
  * 
  * @param {Any Datatype} value: Locate the first occurence of <value> within 
  *                              <array>.
@@ -183,7 +182,7 @@ module.exports.last = last;
   *                  Return true if <array> contains <value>.
   *                  Return false otherwise. 
   * 
-  * @param {Array} collection: Loops through <array> to locate <value>
+  * @param {Array} array: Loops through <array> to locate <value>
   * 
   * @param {Any Datatype} value: Returns true if <array> contains <value>
   *                              Returns false if not.
@@ -235,7 +234,7 @@ module.exports.each = each;
 /**
  * unique: Takes an array and returns a new array with all duplicates removed.
  * 
- * @param: {Array} collection: Array is iterated and locates the index of each 
+ * @param: {Array} array: Array is iterated and locates the index of each 
  *                          duplicate, eventually pushing only singular elements
  *                          to the new array.
  * 
@@ -263,7 +262,7 @@ module.exports.unique = unique;
  *              Returns a new array with all values that returned true from 
  *              calling function.
  * 
- * @param {Array} collection: Iterate through <array> by calling each function. 
+ * @param {Array} array: Iterate through <array> by calling each function. 
  *                      
  * @param {Function} action: Invoke a function with arguments to determine which
  *                          values pass and return those values to a new array 
@@ -294,9 +293,9 @@ module.exports.filter = filter;
  *              Returns a new array with all values that returned false from 
  *              calling function.
  * 
- * @param {Array} collection: Iterate through <array> by calling each function. 
+ * @param {Array} array: Iterate through <array> by calling each function. 
  *                      
- * @param {Function} action: Invoke a function with arguments to determine which
+ * @param {Function} aFunction: Invoke a function with arguments to determine which
  *                          values pass and return those values that did not 
  *                          pass to a new array of false values
  * 
@@ -319,13 +318,13 @@ module.exports.reject = reject;
  *              element in <array> with passing arguments. Returns a new array 
  *              with two sub arrays. One containing truthy values, other falsy.
  * 
- * @param {Array} collection: Array is used as a parameter for reject and 
+ * @param {Array} array: Array is used as a parameter for reject and 
  *                              filter functions once called. Reject(falsy) 
  *                              values are pushed into one array, 
  *                              Filter(truthy) values are pushed into other 
  *                              array. 
  * 
- * @param {Function} action: function is used as parameter for filter and reject
+ * @param {Function} fun: function is used as parameter for filter and reject
  *                              functions when called as well.
  * 
  * @return {Array} collection: Return a new array with two sub arraty inside.
@@ -355,7 +354,7 @@ module.exports.partition = partition;
  * 
  * @param {Array or object} collection: The collection over which to iterate.
  * 
- * @param {Function} action: Function called with arguements to determine which
+ * @param {Function} aFunction: Function called with arguements to determine which
  *                          pass in the collection. Return value of each function
  *                          called is saved in new array.
  * 
@@ -379,9 +378,9 @@ module.exports.map = map;
 /**
  * pluck:  Returns an array containing value of every property in array.
  * 
- * @param {Array} collection: Array containg objects. 
+ * @param {Array} arrayOfObjects: Array containg objects. 
  * 
- * @param {Property} value: Property within objects of the array that is to be 
+ * @param {string} property: Property within objects of the array that is to be 
  *                          returned into a new array.
  * 
  * @return {Any Datatype} value: Return the element's property value.
@@ -408,7 +407,7 @@ module.exports.pluck = pluck;
  * 
  * @param {Array or object} collection: Collection over which to iterate.
  * 
- * @param {Function} action: Function is called with arguments to determine if
+ * @param {Function} aFunction: Function is called with arguments to determine if
  *          elements in the collection are true or false values.
  * 
  * @return {Boolean} value: Return a boolean value: true or false.
@@ -439,7 +438,7 @@ module.exports.every = every;
  * 
  * @param {Array or object} collection: Collection over which to iterate.
  * 
- * @param {Function} action: Function is called with arguments to determine if
+ * @param {Function} aFunction: Function is called with arguments to determine if
  *          elements in the collection are true or false values.
  * 
  * @return {Boolean} value: Return a boolean value: true or false.
@@ -469,11 +468,11 @@ module.exports.some = some;
  *          calls function with arguements to pass through. The values of seed 
  *          becomes the previous result for the first iteration. 
  *  
- * @param {Array} collection: The array for which to iterate.
+ * @param {Array} array: The array for which to iterate.
  * 
- * @param {Function} action: Function is invoked with passing arguements.
+ * @param {Function} func: Function is invoked with passing arguements.
  * 
- * @param {Seed} value: Seed equals the previous result on first iteration. Its
+ * @param {Any Datatype} seed: Seed equals the previous result on first iteration. Its
  *                      value will change with each iteration.
  * 
  * @return {Any Datatype} value: Return the value of final function call.
@@ -503,12 +502,12 @@ module.exports.reduce = reduce;
  * extend: Copes propeerties from one object to another. The amount of objects
  *          pass could be infinte. i.e. no set amount of parameters.
  * 
- * @param: {Object 1} collection: Object in which will be used to copy values to. 
+ * @param: {Object 1} obj1: Object in which will be used to copy values to. 
  *                              
- * @param: {Object 2} collection: Object in which will have values copied and 
+ * @param: {Object 2} obj2: Object in which will have values copied and 
  *                                  moved to Object 1.
  * 
- * @param: {...Object} collection: Uses a rest parameter with this object to 
+ * @param: {...Object} ..obj: Uses a rest parameter with this object to 
  *                                  to allow for more than one argument to be
  *                                  passed through. Copy properties from here to
  *                                  Object 1.
